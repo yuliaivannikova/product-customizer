@@ -1,0 +1,34 @@
+{% assign field_json = product.metafields.customizer.fields.value %}
+
+<div id="customizer-fields">
+  {% for field in field_json %}
+    {% if field.type == 'text' %}
+      <label for="customizer-field-{{ field.label }}">{{ field.label }}</label>
+      <input type="text" name="properties[{{ field.label }}]" id="customizer-field-{{ field.label }}">
+    {% elsif field.type == 'color' %}
+      <label for="customizer-field-{{ field.label }}">{{ field.label }}</label>
+      <input type="color" name="properties[{{ field.label }}]" id="customizer-field-{{ field.label }}">
+    {% endif %}
+  {% endfor %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form[action="/cart/add"]');
+    const container = document.getElementById('customizer-fields');
+
+    if (form && container) {
+      form.insertBefore(container, form.firstChild);
+    } else {
+      console.warn('[Customizer] Form or container not found');
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Customizer",
+  "target": "section",
+  "settings": []
+}
+{% endschema %}
