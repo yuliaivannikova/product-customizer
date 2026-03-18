@@ -118,7 +118,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     } else {
         return data({ error: "Field name is required" }, { status: 400 });
     }
-   
+
 };
 export default function ProductCustomizer() {
     const { product, fields } = useLoaderData<typeof loader>();
@@ -215,4 +215,4 @@ export default function ProductCustomizer() {
             </s-section>
         </s-page>
     );
-}
+} 
